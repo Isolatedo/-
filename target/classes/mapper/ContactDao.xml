@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ContactDao">
+  <resultMap id="BaseResultMap" type="com.entity.Contact">
+    <id column="Cnumber" jdbcType="INTEGER" property="cnumber" />
+    <result column="Cname" jdbcType="VARCHAR" property="cname" />
+    <result column="Caddress" jdbcType="VARCHAR" property="caddress" />
+    <result column="Cphone" jdbcType="VARCHAR" property="cphone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Cnumber, Cname, Caddress, Cphone
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contact
+    where Cnumber = #{cnumber,jdbcType=INTEGER}
+  </select>
+  <select id="queryAll" resultType="com.entity.Contact">
+    select <include refid="Base_Column_List"/>
+    from contact
+  </select>
+  <select id="queryByName" parameterType="java.lang.String" resultType="com.entity.Contact">
+    select <include refid="Base_Column_List"/>
+    from contact
+    where Cname = #{cname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contact
+    where Cnumber = #{cnumber,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteContactByName" parameterType="java.lang.String">
+    delete from contact
+    where Cname = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="Cnumber" keyProperty="cnumber" parameterType="com.entity.Contact" useGeneratedKeys="true">
+    insert into contact (Cname, Caddress, Cphone
+      )
+    values (#{cname,jdbcType=VARCHAR}, #{caddress,jdbcType=VARCHAR}, #{cphone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="Cnumber" keyProperty="cnumber" parameterType="com.entity.Contact" useGeneratedKeys="true">
+    insert into contact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cname != null">
+        Cname,
+      </if>
+      <if test="caddress != null">
+        Caddress,
+      </if>
+      <if test="cphone != null">
+        Cphone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null">
+        #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null">
+        #{cphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Contact">
+    update contact
+    <set>
+      <if test="cname != null">
+        Cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="caddress != null">
+        Caddress = #{caddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cphone != null">
+        Cphone = #{cphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Cnumber = #{cnumber,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Contact">
+    update contact
+    set Cname = #{cname,jdbcType=VARCHAR},
+      Caddress = #{caddress,jdbcType=VARCHAR},
+      Cphone = #{cphone,jdbcType=VARCHAR}
+    where Cnumber = #{cnumber,jdbcType=INTEGER}
+  </update>
+</mapper>

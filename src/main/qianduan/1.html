@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="2.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+  <title>通讯录管理系统</title>
+</head>
+<body>
+<h1>通讯录管理系统</h1>
+
+<h2>新增联系人</h2>
+<form id="addContactForm">
+  <label for="name">姓名:</label>
+  <input type="text" id="name" name="name" required>
+  <label for="address">地址:</label>
+  <input type="text" id="address" name="address" required>
+  <label for="phone">电话号码:</label>
+  <input type="text" id="phone" name="phone" required>
+  <button type="submit">新增</button>
+</form>
+
+<h2>联系人列表</h2>
+<table id="contactTable">
+  <tr>
+    <th>姓名</th>
+    <th>地址</th>
+    <th>电话号码</th>
+    <th>操作</th>
+  </tr>
+</table>
+<script src="test.js"></script>
+</body>
+</html>
